@@ -9,7 +9,9 @@ public class Main {
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
-        HelloService helloService = context.getBean(HelloService.class);
-        helloService.sayHello();
+//        HelloService helloService = context.getBean(HelloService.class);
+//        helloService.sayHello();
+        Client client = context.getBean(Client.class);
+        client.processMessage("Hello via Spring DI!");
     }
 }
