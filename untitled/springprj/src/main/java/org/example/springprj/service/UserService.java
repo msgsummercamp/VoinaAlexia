@@ -1,11 +1,9 @@
 package org.example.springprj.service;
-
 import org.example.springprj.model.User;
 import org.example.springprj.repository.IUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

@@ -6,7 +6,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -20,7 +19,7 @@ class UserControllerIntegrationTest {
     private MockMvc mockMvc;
 
     @Test
-    void testGetUsers_returnsOkAndJsonArray() throws Exception {
+    void getUsersReturnsOkAndJsonArray() throws Exception {
         mockMvc.perform(get("/users"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -28,7 +27,7 @@ class UserControllerIntegrationTest {
     }
 
     @Test
-    void testPostUser_createsNewUser() throws Exception {
+    void postUserCreatesNewUser() throws Exception {
         String json = """
                 {
                   "id": 4,
@@ -48,13 +47,13 @@ class UserControllerIntegrationTest {
     }
 
     @Test
-    void testGetUsersWithInvalidMinId() throws Exception {
+    void getUsersWithInvalidMinId() throws Exception {
         mockMvc.perform(get("/users?minId=0"))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
-    void testGetUsersWithValidMinId() throws Exception {
+    void getUsersWithValidMinId() throws Exception {
         mockMvc.perform(get("/users?minId=1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
