@@ -13,7 +13,7 @@ public class Client {
         this.notificationService = notificationService;
     }
 
-    public void processMessage(String msg) {
-        notificationService.sendNotification(msg);
+    public void processMessage(String message) {
+        notificationService.sendNotification(message);
     }
 }

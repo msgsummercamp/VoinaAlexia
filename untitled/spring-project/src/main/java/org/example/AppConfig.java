@@ -7,8 +7,4 @@ import org.springframework.context.annotation.ComponentScan;
 @Configuration
 @ComponentScan(basePackages = "org.example")
 public class AppConfig {
-//    @Bean
-//    public HelloService helloService() {
-//        return new HelloService();
-//    }
 }
