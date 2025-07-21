@@ -1,9 +1,12 @@
 package org.example.service;
 
+import org.example.dto.UserRequest;
 import org.example.model.User;
 import org.example.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 import java.util.List;
 
@@ -21,20 +24,36 @@ public class UserService {
         return repository.findByEmail(email);
     }
 
-    public User saveUser(User user) {
-        return repository.save(user);
+    public User saveUser(UserRequest request) {
+        return repository.save(new User(
+                null,
+                request.getUsername(),
+                request.getEmail(),
+                request.getPassword(),
+                request.getFirstname(),
+                request.getLastname()
+        ));
     }
+
 
     public void deleteUser(Long id) {
         repository.deleteById(id);
     }
 
-    public User updateUser(User user) {
-        return repository.save(user);
+    public User updateUser(Long id, UserRequest request) {
+        return repository.save(new User(
+                id,
+                request.getUsername(),
+                request.getEmail(),
+                request.getPassword(),
+                request.getFirstname(),
+                request.getLastname()
+        ));
     }
 
-    public List<User> getAllUsers() {
-        return repository.findAll();
+
+    public Page<User> getAllUsers(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     public long countAllUsers() {
