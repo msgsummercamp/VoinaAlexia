@@ -26,5 +26,3 @@ function showDog(): void {
             btn.textContent = 'Show me a dog!';
         });
 }
-
-(window as any).showDog = showDog;
