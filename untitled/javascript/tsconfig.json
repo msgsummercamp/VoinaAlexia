@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES6",                     // Cod JS generat va folosi sintaxă modernă
+    "module": "ES6",                     // Tipul de module (sau "none" pentru cod clasic)
+    "outDir": "./dist",                  // Unde va pune fișierele .js compilate
+    "rootDir": "./",                     // De unde să ia fișierele .ts
+    "strict": true,                      // Activează verificări stricte
+    "esModuleInterop": true,            // Pentru suport complet la importuri
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["dog.ts"]
+}
