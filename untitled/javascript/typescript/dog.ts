@@ -3,38 +3,28 @@ type DogApiResponse = {
     status: string;
 };
 
-const heading: HTMLHeadingElement = document.createElement('h1');
-heading.textContent = 'Random Dog Gallery';
-document.body.appendChild(heading);
+function showDog(): void {
+    const btn = document.getElementById('dogBtn') as HTMLButtonElement | null;
+    const img = document.getElementById('dogImg') as HTMLImageElement | null;
 
-const btn: HTMLButtonElement = document.createElement('button');
-btn.id = 'dogBtn';
-btn.textContent = 'Show me a dog!';
-document.body.appendChild(btn);
+    if (!btn || !img) return;
 
-const img: HTMLImageElement = document.createElement('img');
-img.id = 'dogImg';
-img.style.display = 'none';
-img.style.maxWidth = '400px';
-img.style.marginTop = '20px';
-img.style.borderRadius = '8px';
-document.body.appendChild(img);
-
-// @ts-ignore
-btn.addEventListener('click', async (): Promise<void> => {
     btn.disabled = true;
     btn.textContent = 'Loading...';
 
-    try {
-        const res: Response = await fetch('https://dog.ceo/api/breeds/image/random');
-        const data: DogApiResponse = await res.json();
+    fetch('https://dog.ceo/api/breeds/image/random')
+        .then((res) => res.json())
+        .then((data: DogApiResponse) => {
+            img.src = data.message;
+            img.style.display = 'block';
+        })
+        .catch(() => {
+            alert('Failed to fetch dog image.');
+        })
+        .finally(() => {
+            btn.disabled = false;
+            btn.textContent = 'Show me a dog!';
+        });
+}
 
-        img.src = data.message;
-        img.style.display = 'block';
-    } catch (e) {
-        alert('Failed to fetch dog image.');
-    } finally {
-        btn.disabled = false;
-        btn.textContent = 'Show me a dog!';
-    }
-});
+(window as any).showDog = showDog;
