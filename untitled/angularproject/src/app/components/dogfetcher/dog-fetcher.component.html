@@ -1,0 +1,9 @@
+<div class="dog-container">
+  <h1>Random Dog Gallery</h1>
+
+  <button mat-raised-button color="primary" (click)="showDog()" [disabled]="loading()">
+    {{ loading() ? 'Loading...' : 'Show me a dog!' }}
+  </button>
+
+  <img *ngIf="dogImageUrl()" [src]="dogImageUrl()" alt="Random dog" />
+</div>
