@@ -10,17 +10,14 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './dog-fetcher.component.scss',
 })
 export class DogFetcherComponent {
-  // @ts-ignore
-  public readonly dogImageUrl = signal<string>();
+  public readonly dogImageUrl = signal<string | undefined>(undefined);
   public readonly loading = signal(false);
-  // @ts-ignore
-  public readonly errorMessage = signal<string>();
+  public readonly errorMessage = signal<string | undefined>(undefined);
 
   private readonly http = inject(HttpClient);
 
-  showDog() {
+  public showDog() {
     this.loading.set(true);
-    // @ts-ignore
     this.errorMessage.set(undefined);
 
     this.http.get<{ message: string }>('https://dog.ceo/api/breeds/image/random').subscribe({
