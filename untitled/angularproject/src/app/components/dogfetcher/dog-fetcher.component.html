@@ -5,5 +5,12 @@
     {{ loading() ? 'Loading...' : 'Show me a dog!' }}
   </button>
 
-  <img *ngIf="dogImageUrl()" [src]="dogImageUrl()" alt="Random dog" />
+  @let url = dogImageUrl();
+  @if(url) {
+    <img [src]="url" alt="Random dog" />
+  }
+
+  @if (errorMessage()) {
+    <p class="error-message">{{ errorMessage() }}</p>
+  }
 </div>
