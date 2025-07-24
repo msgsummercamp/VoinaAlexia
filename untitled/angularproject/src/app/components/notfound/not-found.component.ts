@@ -9,4 +9,6 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './not-found.component.html',
   styleUrl: './not-found.component.scss',
 })
-export class NotFoundComponent {}
+export class NotFoundComponent {
+  readonly notFoundImageUrl = 'https://media.giphy.com/media/3o6ZtaO9BZHcOjmErm/giphy.gif';
+}
