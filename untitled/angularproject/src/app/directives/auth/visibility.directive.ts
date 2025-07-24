@@ -4,7 +4,6 @@ import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
   selector: '[appIfAuthenticated]',
 })
 export class IfAuthenticatedDirective {
-  private isVisible = false;
   private isAuthenticated = true;
 
   constructor(
@@ -12,15 +11,11 @@ export class IfAuthenticatedDirective {
     private viewContainer: ViewContainerRef
   ) {}
 
-  @Input() set appIfAuthenticated(condition: boolean | '') {
-    const show = condition === '' || condition === true;
-
-    if (this.isAuthenticated && show && !this.isVisible) {
+  @Input() set appIfAuthenticated(condition: boolean) {
+    if (this.isAuthenticated) {
       this.viewContainer.createEmbeddedView(this.templateRef);
-      this.isVisible = true;
-    } else if ((!this.isAuthenticated || !show) && this.isVisible) {
+    } else if (!this.isAuthenticated || condition) {
       this.viewContainer.clear();
-      this.isVisible = false;
     }
   }
 }
