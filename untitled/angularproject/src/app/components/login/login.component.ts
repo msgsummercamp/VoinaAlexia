@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
@@ -12,13 +12,11 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  private readonly auth = inject(AuthService);
+  private readonly router = inject(Router);
 
-  login() {
-    this.authService.login();
+  public login() {
+    this.auth.login();
     this.router.navigate(['/home']);
   }
 }

@@ -10,5 +10,5 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './not-found.component.scss',
 })
 export class NotFoundComponent {
-  readonly notFoundImageUrl = 'https://media.giphy.com/media/3o6ZtaO9BZHcOjmErm/giphy.gif';
+  public readonly notFoundImageUrl = 'https://media.giphy.com/media/3o6ZtaO9BZHcOjmErm/giphy.gif';
 }

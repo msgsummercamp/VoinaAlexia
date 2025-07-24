@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
@@ -10,11 +10,10 @@ import { Router } from '@angular/router';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  constructor(
-    public auth: AuthService,
-    private router: Router
-  ) {}
-  handleClick() {
+  public readonly auth = inject(AuthService);
+  private readonly router = inject(Router);
+
+  public handleClick() {
     if (this.auth.isAuthenticated()) {
       this.auth.logout();
       this.router.navigate(['/home']);

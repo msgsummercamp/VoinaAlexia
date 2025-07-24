@@ -1,25 +1,22 @@
-import { Directive, effect, Input, signal, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, effect, Input, Signal, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
   selector: '[appIfAuthenticated]',
 })
 export class IfAuthenticatedDirective {
-  private isAuthenticated = signal(true);
+  @Input({ alias: 'appIfAuthenticated', required: true })
+  inputSignal!: Signal<boolean>;
 
   constructor(
     private templateRef: TemplateRef<unknown>,
     private viewContainer: ViewContainerRef
   ) {
     effect(() => {
-      if (this.isAuthenticated()) {
+      if (this.inputSignal()) {
         this.viewContainer.createEmbeddedView(this.templateRef);
       } else {
         this.viewContainer.clear();
       }
     });
-  }
-
-  @Input() set appIfAuthenticated(condition: boolean) {
-    this.isAuthenticated.set(condition);
   }
 }
