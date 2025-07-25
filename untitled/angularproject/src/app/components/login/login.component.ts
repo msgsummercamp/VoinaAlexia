@@ -1,22 +1,23 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
+import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [CommonModule, MatButtonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  private readonly auth = inject(AuthService);
-  private readonly router = inject(Router);
+  private readonly formBuilder = inject(NonNullableFormBuilder);
+  protected readonly loginForm = this.formBuilder.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+  });
 
-  public login() {
-    this.auth.login();
-    this.router.navigate(['/home']);
+  public handleSubmit() {
+    if (this.loginForm.valid) {
+      console.log(this.loginForm.value);
+    }
   }
 }
