@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
-  FormGroup,
   NonNullableFormBuilder,
   ReactiveFormsModule,
   Validators,
@@ -25,7 +24,7 @@ export class LoginComponent {
   private readonly formBuilder = inject(NonNullableFormBuilder);
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
-  protected readonly loginForm: FormGroup<LoginForm> = this.formBuilder.group({
+  protected readonly loginForm = this.formBuilder.group<LoginForm>({
     email: this.formBuilder.control('', [Validators.required, Validators.email]),
     password: this.formBuilder.control('', [Validators.required, Validators.minLength(6)]),
   });
