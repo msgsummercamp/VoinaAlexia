@@ -31,8 +31,8 @@ export class LoginComponent {
 
   public handleSubmit() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
-      this.authService.login();
+      const { email, password } = this.loginForm.getRawValue();
+      this.authService.login(email, password);
       this.router.navigate(['/home']);
     }
   }

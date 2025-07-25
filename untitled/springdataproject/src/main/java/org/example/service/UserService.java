@@ -4,6 +4,7 @@ import org.example.dto.UserRequest;
 import org.example.model.User;
 import org.example.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,9 @@ public class UserService {
 
     @Autowired
     private IUserRepository repository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public Optional<User> findByUsername(String username) {
         return repository.findByUsername(username);
@@ -29,7 +33,7 @@ public class UserService {
                 null,
                 request.getUsername(),
                 request.getEmail(),
-                request.getPassword(),
+                passwordEncoder.encode(request.getPassword()),
                 request.getFirstname(),
                 request.getLastname()
         ));
