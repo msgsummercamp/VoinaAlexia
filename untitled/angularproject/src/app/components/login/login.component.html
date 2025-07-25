@@ -9,9 +9,11 @@
       formControlName="email"
       placeholder="you@example.com"
     />
-    <div class="error" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-      Please enter a valid email.
-    </div>
+    @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+      <div class="error">
+        Please enter a valid email.
+      </div>
+    }
 
     <label for="password">Password:</label>
     <input
@@ -20,9 +22,11 @@
       formControlName="password"
       placeholder="At least 6 characters"
     />
-    <div class="error" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-      Password must be at least 6 characters long.
-    </div>
+    @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+      <div class="error">
+        Password must be at least 6 characters long.
+      </div>
+    }
 
     <button type="submit" [disabled]="loginForm.invalid">
       Login
