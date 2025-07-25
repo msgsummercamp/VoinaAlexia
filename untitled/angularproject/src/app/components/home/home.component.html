@@ -1,0 +1,15 @@
+<div class="home-container">
+  <h1>Welcome to Dog Gallery!</h1>
+
+  <p class="status">
+    <span>Status:</span>
+    <strong>
+      {{ auth.isAuthenticated() ? 'You are logged in' : 'You are logged out' }}
+    </strong>
+  </p>
+
+  <button mat-raised-button color="primary" (click)="handleClick()">
+    {{ auth.isAuthenticated() ? 'Logout' : 'Login' }}
+  </button>
+</div>
+
